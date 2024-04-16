@@ -33,12 +33,13 @@ desliga_ = 0
 restart_ = 0
 sensor_old = 0
 contador = 0
+msg = ""
 
 # criar a variavel chaves
 chaves = {"liga": 0, "desliga": 0, "restart": 0}
 
 # criar a variável a ser postada
-postagem = {'sensor': contador}
+postagem = {'sensor': contador, 'mensagem': msg}
 
 while True:
     # lógica de monitoramento e tratamento dos valores do sensor
@@ -47,7 +48,7 @@ while True:
     if (sensor_old == 1) and (sensor == 0):
         sensor_old = sensor
         contador = contador + 1
-        postagem = {'sensor': contador}
+        postagem = {{'sensor': contador}, {'mensagem': msg}}
 
     # detector de borda de subida, apenas para atualizar as variáveis
     if(sensor_old == 0) and (sensor == 1):
@@ -76,18 +77,22 @@ while True:
                 GPIO.output(liga, 1)
                 time.sleep(5)
                 GPIO.output(liga, 0)
+                msg = 'Ligado'
             if(desliga_ == True):
                 GPIO.output(liga, 0)
                 GPIO.output(auto, 0)
                 time.sleep(0.5)
+                msg = 'Desligado'
                 GPIO.output(man, 1)
             if(restart_  == True):
                 GPIO.output(auto, 0)
                 GPIO.output(man, 1)
                 time.sleep(0.5)
+                msg = 'Reiniciando'
                 GPIO.output(liga, 1)
                 time.sleep(10)
                 GPIO.output(liga, 0)
+                msg = 'Reiniciado'
         else:
             continue
 
