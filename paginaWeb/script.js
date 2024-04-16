@@ -21,7 +21,7 @@ function receiverRequest(){
     })
 }
 
-function receiverRequest(){
+function receiverMsgRequest(){
     fetch(urlGet, {
         method: 'GET',
         headers: {
@@ -33,7 +33,7 @@ function receiverRequest(){
     })
 }
 
-setInterval(receiverRequest, 2000)  
+setInterval(receiverMsgRequest, receiverRequest, 2000)  
 
 ligarButton.addEventListener('click', () => {
     let requestData = {"liga": 1, "desliga": 0, "restart": 0}
