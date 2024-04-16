@@ -18,22 +18,12 @@ function receiverRequest(){
     .then(json => {
         producaoDisplay.textContent = json.sensor;
         console.log(json.sensor);
+        msgDisplay.textContent = json.msg;
+        console.log(json.msg);
     })
 }
 
-function receiverMsgRequest(){
-    fetch(urlGet, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    }).then(response => response.json()).then(json => {
-        msgDisplay.textContent = json.mensagem;
-        console.log(json.mensagem);
-    })
-}
-
-setInterval(receiverMsgRequest, receiverRequest, 2000)  
+setInterval(receiverRequest, 2000)
 
 ligarButton.addEventListener('click', () => {
     let requestData = {"liga": 1, "desliga": 0, "restart": 0}
