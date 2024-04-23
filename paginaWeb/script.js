@@ -3,6 +3,7 @@ const desligarButton = document.getElementById('desligarButton');
 const restartButton = document.getElementById('restartButton');
 const producaoDisplay = document.getElementById('producaoDisplay');
 const msgDisplay = document.getElementById('msg');
+const erro = document.getElementById('erro');
 
 var urlPost = 'https://leanwebsensor1.onrender.com/chaves'
 var urlGet = 'https://leanwebsensor1.onrender.com/producao'
@@ -36,7 +37,7 @@ function receiverRequest(){
     }
     else
         erro.textContent = "";
-    
+
 }
 
 setInterval(receiverRequest, 2000)
